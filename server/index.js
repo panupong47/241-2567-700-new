@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const cors = require('cors');
+const e = require('express');
 const app = express();
 
 
@@ -24,6 +25,98 @@ const initMySQL = async () => {
     });
 };
 
+const validateData = (userData) => {
+    let errors = []
+
+    if (!userData.firstName) {
+        errors.push('กรุณากรอกชื่อ')
+    }
+    if (!userData.lastName) {
+        errors.push('กรุณากรอกนามสกุล')
+    }
+    if (!userData.age) {
+        errors.push('กรุณากรอกอายุ')
+    }
+    if (!userData.gender) {
+        errors.push('กรุณาเลือกเพศ')
+    }
+    if (!userData.interests) {
+        errors.push('กรุณาเลือกความสนใจ')
+    }
+    if (!userData.description) {
+        errors.push('กรุณาคำอธิบาย')
+    }
+    return errors
+}
+
+const submitData = async () => {
+    let firstNameDOM = document.querySelector("input[name=firstname]");
+    let lastNameDOM = document.querySelector("input[name=lastname]");
+    let ageDOM = document.querySelector("input[name=age]");
+    let genderDOM = document.querySelector("input[name=gender]:checked") || {}
+    let interestDOMs = document.querySelectorAll("input[name=interest]:checked") || {}
+    let descriptionDOM = document.querySelector("textarea[name='description']");
+
+    let messageDOM = document.getElementById('message');
+    
+    try {
+    let interest = '';
+    for (let i = 0; i < interestDOMs.length; i++) {
+        interest += interestDOMs[i].value 
+        if (i != interestDOMs.length - 1) {
+            interest += ', '
+        }
+    }
+
+
+    let userData = {
+        firstName: firstNameDOM.value,
+        lastName: lastNameDOM.value,
+        age: ageDOM.value,
+        gender: genderDOM.value,
+        description: descriptionDOM.value,
+        interests: interest
+    }
+
+    console.log('submitData', userData);
+
+        const errors = validateData(userData)
+        if (errors.length > 0) { 
+            //มี error
+            throw {
+                message : "กรุณากรอกข้อมูลให้ครบถ้วน",
+                errors: errors
+            } /* การโยน*/
+
+        }
+    
+        const response = await axios.post('http://localhost:8000/users', userData)
+        console.log('response', response.data);
+        messageDOM.innerText = "บันทึกข้อมูลเรียบร้อย"
+        messageDOM.className = "message success"
+    } catch (error) {
+        console.log('error message', error.message);
+        console.log('error', error.errors);
+        /*
+        if (error.response) {
+            console.error('error', error.response.data.message);
+        }
+            */
+
+        let htmlData = '<div>'
+        htmlData += `<div>${error.message}</div>`
+        htmlData += '<ul>'
+        for (let i = 0; i < error.errors.length; i++) {
+            htmlData += `<li>${error.errors[i]}</li>`
+        }
+        htmlData += '</ul>'
+        htmlData += '</div>'
+
+        messageDOM.innerText = "บันทึกข้อมูลไม่สำเร็จ"
+        messageDOM.className = "message danger"
+    }   
+}
+
 // GET /users - ดึง Users ทั้งหมด
 app.get('/users', async (req, res) => {
     const results = await conn.query('SELECT * FROM users');
@@ -34,16 +127,25 @@ app.get('/users', async (req, res) => {
 app.post('/users', async (req, res) => {
     try {
         let user = req.body;
+        const errors = validateData(user)
+        if (errors.length > 0) {
+            throw{
+                message: 'กรุณากรอกข้อมูลให้ครบถ้วน',    
+                errors: errors
+            }
+        }
         const results = await conn.query('INSERT INTO users SET ?', user);
         res.json({
             message: 'Create user successfully',
             data: results[0]
         })
     } catch (error) {
+        const errorMessage = error.message || 'something went wrong';
+        const errors = error.errors || []
         console.error('error :', error.message);
         res.status(500).json({
-            message: 'something went wrong',
-            errorMessage: error.message
+            message: errorMessage,
+            errorMessage: errors
         }
         )
     }
