@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #DDD;
+        }
+        
+        tr:hover {background-color: #D6EEEE;}
+        </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styleuser.css">
 </head>
-<body>
-    <a href="index1.html">Back to register</a>
-    useser menagement page
-    <div id="user"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-    <script src="user.js"></script>
+<body>
+    <div>
+        <a href="index1.html" class="t1">
+        <button href="index1.html" class="button">
+            ==>Back to register
+        </button>
+    </a>
+        <div class="borderimg"> User management page </div>
+        <table class="table1" style="width:100%">
+            <tr>
+                <th style="width:5%"> ID </th>
+                <th style="width:35%"> FIRSTNAME </th>
+                <th style="width:35%"> LASTNAME </th>
+                <th style="width:10%"> EDIT </th>
+                <th style="width:10%"> DELETE </th>
+            </tr>
+        </table>
+        <div id="user"></div>
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+        <script src="user.js"></script>
+    </div>
+
 </body>
-</body>
+
 </html>
