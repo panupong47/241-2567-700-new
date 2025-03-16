@@ -120,10 +120,7 @@ const submitData = async () => {
         messageDOM.innerText = message
         messageDOM.className = "message success"
 
-        const response = await axios.put(`${BASE_URL}/users`, userData)
-        console.log('response', response.data);
-        messageDOM.innerText = "บันทึกข้อมูลเรียบร้อย"
-        messageDOM.className = "message success"
+        
     } catch (error) {
         console.log('error message', error.message);
         console.log('error', error.errors);
@@ -136,11 +133,11 @@ const submitData = async () => {
 
        
         let htmlData = '<div>'; 
-        htmlData += '<div>' + error.message + '</div>';
+        htmlData += `<div> ${error.message} </div>`
         htmlData += '<ul>';
         
         for (let i = 0; i < error.errors.length; i++) {
-            htmlData += '<li>' + error.errors[i] + '</li>';
+            htmlData += `<li> ${error.errors[i]} </li>`
         }
         htmlData += '</ul>';
         htmlData += '</div>';

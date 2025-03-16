@@ -1,48 +1,69 @@
 const BASE_URL = 'http://localhost:8000';
+
 window.onload = async () => {
     await loadData()
 }
+
 const loadData = async () => {
-    console.log('user page loaded');
-    //1. load user ทั้งหมดจาก api ที่เตรียมไว้
-    const respone = await axios.get(`${BASE_URL}/users`)
+    console.log('user page load')
 
-    console.log(respone.data);
+    // 1. load user ทั้งหมดจาก api ที่เตรียมไว้
+    const response = await axios.get(`${BASE_URL}/users`);
 
-    const userDOM = document.getElementById('user')
-    //2. นำ user ทั้งหมด โหลดกลับเข้าไปใน html
-   
+    console.log(response.data);
+
+    const userDOM = document.getElementById('user');
+
+    // 2.นำ user ทั้งหมด โหลดกลับเข้าไปใน HTML(แสดงผล)
+
     let htmlData = '<div>'
-    for (let i = 0; i < respone.data.length; i++) {
-        let user = respone.data[i]
-        htmlData += `<div>
-        <table>
+    htmlData += `<table>
+         
             <tr>
-                <td > ${user.id} </td> 
-                <td > ${user.firstname} </td> 
-                <td > ${user.lastname}  </td> 
-                <td > ${user.age} </td>
-                <td > <a href='index1.html?id=${user.id}'><button class="button1">Edit</button></a> </td> 
-                <td > <button class="button1" class = 'delete' data-id='${user.id}'>delete</button> </td> 
+               <th class='balance'>ID</th>
+               <th class='balance'>First Name</th>
+               <th class='balance'>Last Name</th>
+               <th class='balance'>Age</th>
+               <th class='balance'>Action</th>
             </tr>
-        </table>
-        </div >`
-    }
-    htmlData += '</div>'
-    userDOM.innerHTML = htmlData
+         `
 
-    //3. ลบ user
-    const deleteDOMs = document.getElementsByClassName('delete')
+    for (let i = 0; i < response.data.length; i++) {
+        let user = response.data[i];
+
+        htmlData += `<div>
+         
+            <tr>
+ 
+               <td class='balance'>${user.id}</td> 
+               <td class='balance'> ${user.firstname}</td>
+               <td class='balance'>${user.lastname}</td>
+               <td class='balance'>${user.age}</td>
+
+               <td class='balance '>
+                  <a href = 'index1.html?id=${user.id}' ><button class='button button2'>Edit</button></a>
+                  <button class="button1" class = 'delete' data-id='${user.id}'>delete</button>
+               </td>
+            </tr>
+        
+      </div>`
+    }
+    htmlData += '</table>'
+    htmlData += '</div>'
+    userDOM.innerHTML = htmlData;
+
+    // 3. ลบ user
+    const deleteDOMs = document.getElementsByClassName('delete');
     for (let i = 0; i < deleteDOMs.length; i++) {
-        deleteDOMs[i].addEventListener('click', async (event) => {
+        deleteDOMs[i].addEventListener('click', async (e) => {
             //ดึง id ของ user ที่ต้องการลบ
-            const id = event.target.dataset.id
+            const id = e.target.dataset.id
             try {
-                await axios.delete(`${BASE_URL}/users/${id}`)
-                loadData() //recursive function = เรียกใช้ฟังก์ชัน -> ตัวเอง
+                await axios.delete(`${BASE_URL}/users/${id}`);
+                loadData() // recursive function = เรียกใช้ฟังก์ชันตัวเอง   
             } catch (error) {
-                console.error('error', error)
+                console.log('error', error);
             }
-        })
+        });
     }
 }

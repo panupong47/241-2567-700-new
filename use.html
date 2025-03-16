@@ -1,50 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-    <style>
-        table {
-          border-collapse: collapse;
-          width: 100%;
-        }
-        
-        th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #DDD;
-        }
-        
-        tr:hover {background-color: #D6EEEE;}
-        </style>
+<html class='bgcolor' lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="stylebackup.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="stylebackup.css">
 </head>
-
 <body>
-    <div>
-        <a href="index1.html" class="h2">
-            <button class="button" style="vertical-align:middle"><span>
-                    Go to User management
-                </span>
-            </button>
-        </a>
-        <div class="borderimg"> User management page </div>
-        <table class="table1" style="width:100%">
-            <tr>
-                <th style="width:5%"> ID </th>
-                <th style="width:35%"> FIRSTNAME </th>
-                <th style="width:35%"> LASTNAME </th>
-                <th style="width:5%"> AGE </th>
-                <th style="width:10%"> EDIT </th>
-                <th style="width:10%"> DELETE </th>
-            </tr>
-        </table>
-        <div id="user"></div>
-        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-        <script src="user.js"></script>
-    </div>
+   <div class='bgcolor'>
+      <div class="container">
+         <div class="header">User management page</div>
+         <div id="user"> </div>
+      
+         <script src="user.js"></script>
+
+         
+         <div class='position'>
+            <a href="index1.html">
+               <button class="button button1 ">Back to register</button>
+            </a>
+         </div>
+      </div>
+   </div>   
+
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 
 </body>
-
 </html>
