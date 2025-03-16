@@ -58,63 +58,62 @@ const submitData = async () => {
     let descriptionDOM = document.querySelector("textarea[name='description']");
 
     let messageDOM = document.getElementById('message');
-    
+
     try {
-    let interest = '';
-    for (let i = 0; i < interestDOMs.length; i++) {
-        interest += interestDOMs[i].value 
-        if (i != interestDOMs.length - 1) {
-            interest += ', '
+        let interest = '';
+        for (let i = 0; i < interestDOMs.length; i++) {
+            interest += interestDOMs[i].value
+            if (i != interestDOMs.length - 1) {
+                interest += ', '
+            }
         }
-    }
 
 
-    let userData = {
-        firstName: firstNameDOM.value,
-        lastName: lastNameDOM.value,
-        age: ageDOM.value,
-        gender: genderDOM.value,
-        description: descriptionDOM.value,
-        interests: interest
-    }
-
-    console.log('submitData', userData);
-
-        const errors = validateData(userData)
-        if (errors.length > 0) { 
-            //มี error
-            throw {
-                message : "กรุณากรอกข้อมูลให้ครบถ้วน",
-                errors: errors
-            } /* การโยน*/
-
+        let userData = {
+            firstName: firstNameDOM.value,
+            lastName: lastNameDOM.value,
+            age: ageDOM.value,
+            gender: genderDOM.value,
+            description: descriptionDOM.value,
+            interests: interest
         }
-    
-        const response = await axios.post('http://localhost:8000/users', userData)
-        console.log('response', response.data);
-        messageDOM.innerText = "บันทึกข้อมูลเรียบร้อย"
-        messageDOM.className = "message success"
-    } catch (error) {
-        console.log('error message', error.message);
-        console.log('error', error.errors);
+
+        console.log('submitData', userData);
         /*
-        if (error.response) {
-            console.error('error', error.response.data.message);
-        }
-            */
+                const errors = validateData(userData)F
+                if (errors.length > 0) { 
+                    //มี error
+                    throw {
+                        message : "กรุณากรอกข้อมูลให้ครบถ้วน",
+                        errors: errors
+                    }  การโยน
+    }
+*/
+    const response = await axios.post('http://localhost:8000/users', userData)
+    console.log('response', response.data);
+    messageDOM.innerText = "บันทึกข้อมูลเรียบร้อย"
+    messageDOM.className = "message success"
+} catch (error) {
+    console.log('error message', error.message);
+    console.log('error', error.errors);
+    /*
+    if (error.response) {
+        console.error('error', error.response.data.message);
+    }
+        */
 
-        let htmlData = '<div>'
-        htmlData += `<div>${error.message}</div>`
-        htmlData += '<ul>'
-        for (let i = 0; i < error.errors.length; i++) {
-            htmlData += `<li>${error.errors[i]}</li>`
-        }
-        htmlData += '</ul>'
-        htmlData += '</div>'
+    let htmlData = '<div>'
+    htmlData += `<div>${error.message}</div>`
+    htmlData += '<ul>'
+    for (let i = 0; i < error.errors.length; i++) {
+        htmlData += `<li>${error.errors[i]}</li>`
+    }
+    htmlData += '</ul>'
+    htmlData += '</div>'
 
-        messageDOM.innerText = "บันทึกข้อมูลไม่สำเร็จ"
-        messageDOM.className = "message danger"
-    }   
+    messageDOM.innerText = "บันทึกข้อมูลไม่สำเร็จ"
+    messageDOM.className = "message danger"
+}   
 }
 
 // GET /users - ดึง Users ทั้งหมด
@@ -129,8 +128,8 @@ app.post('/users', async (req, res) => {
         let user = req.body;
         const errors = validateData(user)
         if (errors.length > 0) {
-            throw{
-                message: 'กรุณากรอกข้อมูลให้ครบถ้วน',    
+            throw {
+                message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
                 errors: errors
             }
         }
@@ -207,7 +206,7 @@ app.delete('/users/:id', async (req, res) => {
         res.status(500).json({
             message: 'something went wrong',
             errorMessage: error.message
-        }) 
+        })
     }
 });
 

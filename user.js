@@ -18,11 +18,12 @@ const loadData = async () => {
         htmlData += `<div>
         <table>
             <tr>
-                <td style="width:5%"> ${user.id} </td> 
-                <td style="width:35%"> ${user.firstname} </td> 
-                <td style="width:35%"> ${user.lastname}  </td> 
-                <td style="width:10%"> <a href='index.html?id=${user.id}'><button class="button1">Edit</button></a> </td> 
-                <td style="width:10%"> <button class="button1" class = 'delete' data-id='${user.id}'>delete</button> </td> 
+                <td > ${user.id} </td> 
+                <td > ${user.firstname} </td> 
+                <td > ${user.lastname}  </td> 
+                <td > ${user.age} </td>
+                <td > <a href='index1.html?id=${user.id}'><button class="button1">Edit</button></a> </td> 
+                <td > <button class="button1" class = 'delete' data-id='${user.id}'>delete</button> </td> 
             </tr>
         </table>
         </div >`

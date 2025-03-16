@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
 </head>
 
 <body>
@@ -13,7 +15,7 @@
 
     <div class="container">
         <div class="header">
-            Register form
+            Register Form
         </div>
 
         <div class="flex form-input">
@@ -58,17 +60,21 @@
             </div>
             <div class="form-input">
                 คำอธิบาย
-                <textarea name="description"></textarea>
+                <textarea name="description" class="form"></textarea>
             </div>
 
             <div id=message class="message"></div>
 
             <div class="center">
-                <button onclick="submitData()" class="button">ส่งข้อมูล</button>
+                <button type="button" onclick="submitData()" class="button">Submit</button>
             </div>
             <a href="use.html" class="h2">
-                <button href="use.html" class="button1">Go to User management</button>
+                <button class="button1" style="vertical-align:middle"><span>
+                        Go to User management
+                    </span>
+                </button>
             </a>
+
         </div>
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
         <script src="index.js"></script>
