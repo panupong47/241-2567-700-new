@@ -42,7 +42,7 @@ table {
 
 .header {
     color: white;
-    font-size: 50px;
+    font-size: 80px;
     text-align: center;
     margin-bottom: 20px;
     font-family: "Sofia", sans-serif;
@@ -63,6 +63,8 @@ table {
     margin-bottom: 5px;
     color: whitesmoke;
     display: flex;
+    
+    
 }
 
 .form-input {
@@ -71,16 +73,12 @@ table {
     
 }
 
-.center {
-    text-align: center;
-    
-}
-
 input.form,
 textarea {
     border: 1px solid #ccc;
     width: 100%;
     border-radius: 10px;
+    border: 1px solid black;
 }
 
 .center {
@@ -124,9 +122,19 @@ textarea {
 }
 
 .message.success {
-    background-color: lightgreen;
+    background-color: green;
+    border-radius: 10px;
+    width: 50%;
     display: block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 25%;
+    box-shadow: 0 0 100px white
+    
 }
+
 
 .message.danger {
     background-color: lightcoral;
@@ -142,7 +150,7 @@ textarea {
 .button1 {
     display: inline-block;
   border-radius: 4px;
-  background-color: #666;
+  background-color: #153448;
   border: none;
   color: #FFFFFF;
   text-align: center;

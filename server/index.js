@@ -193,22 +193,23 @@ app.put('/users/:id', async (req, res) => {
 
 
 // DELETE /users/:id - ลบ Users ตาม ID
-app.delete('/users/:id', async (req, res) => {
-    try {
+app.delete('/users/:id', async(req, res) => {
+    try{
         let id = req.params.id;
-        const results = await conn.query('DELETE  users WHERE id = ?', parseInt(id))
+        const results = await conn.query('DELETE from users WHERE id = ?  ', parseInt(id))
         res.json({
             message: 'Delete user successfully',
             data: results[0]
         })
-    } catch (error) {
-        console.error('error :', error.message)
+    }catch(error){
+        console.error('error: ', error.message)
         res.status(500).json({
             message: 'something went wrong',
             errorMessage: error.message
         })
     }
-});
+
+})
 
 // เริ่มเซิร์ฟเวอร์และเชื่อมต่อฐานข้อมูล
 app.listen(port, async () => {

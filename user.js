@@ -24,6 +24,7 @@ const loadData = async () => {
                <th class='balance'>First Name</th>
                <th class='balance'>Last Name</th>
                <th class='balance'>Age</th>
+               <th class='balance'>Gender</th>
                <th class='balance'>Action</th>
             </tr>
          `
@@ -39,16 +40,17 @@ const loadData = async () => {
                <td class='balance'> ${user.firstname}</td>
                <td class='balance'>${user.lastname}</td>
                <td class='balance'>${user.age}</td>
+               <td class='balance'>${user.gender}</td>
 
                <td class='balance '>
                   <a href = 'index1.html?id=${user.id}' ><button class='button button2'>Edit</button></a>
-                  <button class="button1" class = 'delete' data-id='${user.id}'>delete</button>
+                  <button  class = 'delete' data-id='${user.id}'>delete</button>
                </td>
             </tr>
         
       </div>`
     }
-    htmlData += '</table>'
+    
     htmlData += '</div>'
     userDOM.innerHTML = htmlData;
 
